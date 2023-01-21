@@ -1,0 +1,42 @@
+{
+  "name": "express-mesto-gha",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node --experimental-modules --es-module-specifier-resolution=node app.js",
+    "dev": "nodemon --experimental-modules --es-module-specifier-resolution=node app.js",
+    "lint": "npx eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThreeWorrrlds/express-mesto-gha-my.git"
+  },
+  "keywords": [],
+  "author": "",
+  "type": "module",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ThreeWorrrlds/express-mesto-gha-my/issues"
+  },
+  "homepage": "https://github.com/ThreeWorrrlds/express-mesto-gha-my#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "celebrate": "^15.0.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-rate-limit": "^6.7.0",
+    "helmet": "^6.0.1",
+    "joi": "^17.7.0",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^6.8.2",
+    "validator": "^13.7.0"
+  },
+  "devDependencies": {
+    "depcheck": "^1.4.3",
+    "eslint": "^8.31.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "nodemon": "^2.0.20"
+  }
+}

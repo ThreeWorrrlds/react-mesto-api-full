@@ -1,0 +1,4 @@
+.header__profile-nav {
+  display: flex;
+  flex-direction: row;
+}

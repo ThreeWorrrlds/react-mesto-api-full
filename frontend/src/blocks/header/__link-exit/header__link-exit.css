@@ -1,0 +1,17 @@
+.header__link-exit {
+  color: #A9A9A9;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.22;
+  text-decoration: none;
+  border: none;
+  background-color: transparent;
+  transition: opacity 0.2s;
+  padding: 6px 0 0;
+  height: fit-content;
+  cursor: pointer;
+}
+
+.header__link-exit:hover {
+  opacity: .8;
+}
