@@ -28,6 +28,7 @@ import NotFound from './errors/not-found';
 
 const app = express();
 app.use(cors());
+mongoose.set('strictQuery', false);
 const { PORT = 3000, MONGO_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
 
 const limiter = rateLimit({
