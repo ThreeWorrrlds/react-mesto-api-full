@@ -1,12 +1,20 @@
-import CardModel from '../models/Card';
+const CardModel = require('../models/Card');
+
+const BadRequestError = require('../errors/bad-request-error');
+
+const Forbidden = require('../errors/forbidden');
+
+const NotFound = require('../errors/not-found');
+
+/* import CardModel from '../models/Card';
 
 import BadRequestError from '../errors/bad-request-error';
 
 import Forbidden from '../errors/forbidden';
 
-import NotFound from '../errors/not-found';
+import NotFound from '../errors/not-found'; */
 
-export const getCards = async (req, res, next) => {
+module.exports.getCards = async (req, res, next) => {
   try {
     const cards = await CardModel.find({});
     if (cards) {
@@ -19,10 +27,10 @@ export const getCards = async (req, res, next) => {
   }
 };
 
-export const createCard = async (req, res, next) => {
+module.exports.createCard = async (req, res, next) => {
   try {
-    const { name, link } = req.body;
-    const id = req.user._id;
+    const { name, link } = await req.body;
+    const id = await req.user._id;
     const newCard = await CardModel.create({ name, link, owner: id });
     res.status(201).send(newCard);
   } catch (err) {
@@ -34,7 +42,7 @@ export const createCard = async (req, res, next) => {
   }
 };
 
-export const deleteCardById = async (req, res, next) => {
+module.exports.deleteCardById = async (req, res, next) => {
   await CardModel.findById(req.params.cardId)
     .orFail(new Error('NotFound'))
     .then((card) => {
@@ -59,7 +67,7 @@ export const deleteCardById = async (req, res, next) => {
     });
 };
 
-export const setLikeByCardId = async (req, res, next) => {
+module.exports.setLikeByCardId = async (req, res, next) => {
   await CardModel.findByIdAndUpdate(
     req.params.cardId,
     { $addToSet: { likes: req.user._id } }, // добавить _id в массив, если его там нет
@@ -78,7 +86,7 @@ export const setLikeByCardId = async (req, res, next) => {
     });
 };
 
-export const unsetLikeByCardId = async (req, res, next) => {
+module.exports.unsetLikeByCardId = async (req, res, next) => {
   await CardModel.findByIdAndUpdate(
     req.params.cardId,
     { $pull: { likes: req.user._id } }, // убрать _id из массива

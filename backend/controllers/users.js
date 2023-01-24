@@ -1,3 +1,18 @@
+const bcrypt = require('bcryptjs');
+
+const jwt = require('jsonwebtoken');
+
+const UserModel = require('../models/User');
+
+const BadRequestError = require('../errors/bad-request-error');
+
+const Conflict = require('../errors/conflict');
+
+const NotFound = require('../errors/not-found');
+
+const Unauthorized = require('../errors/unauthorized');
+
+/*
 import bcrypt from 'bcryptjs';
 
 import jwt from 'jsonwebtoken';
@@ -10,9 +25,9 @@ import Conflict from '../errors/conflict';
 
 import NotFound from '../errors/not-found';
 
-import Unauthorized from '../errors/unauthorized';
+import Unauthorized from '../errors/unauthorized'; */
 
-export const createUser = (req, res, next) => {
+module.exports.createUser = (req, res, next) => {
   bcrypt.hash(req.body.password, 10)
     .then((hash) => UserModel.create({
       email: req.body.email,
@@ -21,14 +36,16 @@ export const createUser = (req, res, next) => {
       about: req.body.about,
       avatar: req.body.avatar,
     }))
+    // eslint-disable-next-line consistent-return
     .then((user) => {
-      res.status(201)
-        .send({
+      if (user) {
+        return res.status(201).send({
           email: user.email,
           name: user.name,
           about: user.about,
           avatar: user.avatar,
         });
+      }
       next();
     })
     .catch((err) => {
@@ -43,7 +60,7 @@ export const createUser = (req, res, next) => {
     });
 };
 
-export const login = async (req, res, next) => {
+module.exports.login = async (req, res, next) => {
   const { email, password } = req.body;
   return UserModel.findUserByCredentials(email, password)
     .then((user) => {
@@ -55,7 +72,7 @@ export const login = async (req, res, next) => {
     });
 };
 
-export const getCurrentUser = async (req, res, next) => {
+module.exports.getCurrentUser = async (req, res, next) => {
   try {
     const currentUser = await UserModel.findById(req.user._id);
     if (currentUser) {
@@ -72,7 +89,7 @@ export const getCurrentUser = async (req, res, next) => {
   }
 };
 
-export const getUsers = async (req, res, next) => {
+module.exports.getUsers = async (req, res, next) => {
   try {
     const users = await UserModel.find({});
     if (users) {
@@ -85,7 +102,7 @@ export const getUsers = async (req, res, next) => {
   }
 };
 
-export const getUserById = async (req, res, next) => {
+module.exports.getUserById = async (req, res, next) => {
   try {
     const user = await UserModel.findById(req.params.id);
     if (user) {
@@ -102,7 +119,7 @@ export const getUserById = async (req, res, next) => {
   }
 };
 
-export const updateUserInfo = async (req, res, next) => {
+module.exports.updateUserInfo = async (req, res, next) => {
   try {
     const { name, about } = req.body;
     const newInfo = await UserModel.findByIdAndUpdate(
@@ -120,7 +137,7 @@ export const updateUserInfo = async (req, res, next) => {
   }
 };
 
-export const updateUserAvatar = async (req, res, next) => {
+module.exports.updateUserAvatar = async (req, res, next) => {
   try {
     const { avatar } = req.body;
     const newAvatar = await UserModel.findByIdAndUpdate(

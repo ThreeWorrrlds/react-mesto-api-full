@@ -1,9 +1,15 @@
-import { celebrate, Joi } from 'celebrate';
+const { celebrate, Joi } = require('celebrate');
+
+const { isValidObjectId } = require('mongoose');
+
+const validator = require('validator');
+
+/* import { celebrate, Joi } from 'celebrate';
 import { isValidObjectId } from 'mongoose';
-import validator from 'validator';
+import validator from 'validator'; */
 
 // eslint-disable-next-line import/prefer-default-export
-export const validateUserData = celebrate({
+module.exports.validateUserData = celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required().min(8),
@@ -18,7 +24,7 @@ export const validateUserData = celebrate({
   }).unknown(),
 });
 
-export const validateUserId = celebrate({
+module.exports.validateUserId = celebrate({
   params: Joi.object()
     .keys({
       id: Joi.string().required().custom((value, helpers) => {
@@ -30,14 +36,14 @@ export const validateUserId = celebrate({
     }).unknown(),
 });
 
-export const validateUserUpdateInfo = celebrate({
+module.exports.validateUserUpdateInfo = celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30),
     about: Joi.string().min(2).max(30),
   }).unknown(),
 });
 
-export const validateUserUpdateAvatar = celebrate({
+module.exports.validateUserUpdateAvatar = celebrate({
   body: Joi.object().keys({
     avatar: Joi.string().custom((value, helpers) => {
       if (validator.isURL(value)) {
@@ -48,7 +54,7 @@ export const validateUserUpdateAvatar = celebrate({
   }).unknown(),
 });
 
-export const validateCardData = celebrate({
+module.exports.validateCardData = celebrate({
   body: Joi.object()
     .keys({
       name: Joi.string().required().min(2).max(30),
@@ -61,7 +67,7 @@ export const validateCardData = celebrate({
     }).unknown(),
 });
 
-export const validateCardId = celebrate({
+module.exports.validateCardId = celebrate({
   params: Joi.object()
     .keys({
       cardId: Joi.string().required().custom((value, helpers) => {

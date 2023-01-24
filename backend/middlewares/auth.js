@@ -1,9 +1,13 @@
-import jwt from 'jsonwebtoken';
+const jwt = require('jsonwebtoken');
 
-import Unauthorized from '../errors/unauthorized';
+const Unauthorized = require('../errors/unauthorized');
+
+/* import jwt from 'jsonwebtoken';
+
+import Unauthorized from '../errors/unauthorized'; */
 
 // eslint-disable-next-line consistent-return
-const auth = async (req, res, next) => {
+module.exports.auth = async (req, res, next) => {
   const { authorization } = await req.headers;
   if (!authorization || !authorization.startsWith('Bearer ')) {
     next(new Unauthorized('Необходима авторизация'));
@@ -20,4 +24,4 @@ const auth = async (req, res, next) => {
   next();
 };
 
-export default auth;
+/* export default auth; */

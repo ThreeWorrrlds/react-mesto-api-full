@@ -1,6 +1,10 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
-import validator from 'validator';
+const validator = require('validator');
+
+/* import mongoose from 'mongoose';
+
+import validator from 'validator'; */
 
 const cardSchema = new mongoose.Schema({
   name: {
@@ -30,4 +34,7 @@ const cardSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
-export default mongoose.model('card', cardSchema);
+
+module.exports = mongoose.model('card', cardSchema);
+
+/* export default mongoose.model('card', cardSchema); */

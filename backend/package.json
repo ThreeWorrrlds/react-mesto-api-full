@@ -4,8 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node --experimental-modules --es-module-specifier-resolution=node app.js",
-    "dev": "nodemon --experimental-modules --es-module-specifier-resolution=node app.js",
+    "start": "node app.js",
+    "dev": "nodemon app.js",
     "lint": "npx eslint ."
   },
   "repository": {
@@ -14,7 +14,6 @@
   },
   "keywords": [],
   "author": "",
-  "type": "module",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ThreeWorrrlds/express-mesto-gha-my/issues"

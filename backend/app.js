@@ -1,30 +1,34 @@
-import { rateLimit } from 'express-rate-limit';
+const rateLimit = require('express-rate-limit');
+const helmet = require('helmet');
+const express = require('express');
+const mongoose = require('mongoose');
+const { errors } = require('celebrate');
+const cors = require('cors');
+const usersRoutes = require('./routes/users');
+const cardsRoutes = require('./routes/cards');
+const {
+  login, createUser,
+} = require('./controllers/users');
+const { auth } = require('./middlewares/auth');
+const { errorHandler } = require('./middlewares/error-handler');
+const { validateUserData } = require('./middlewares/validatons');
+const NotFound = require('./middlewares/validatons');
 
+/* import { rateLimit } from 'express-rate-limit';
 import helmet from 'helmet';
-
 import express from 'express';
-
 import mongoose from 'mongoose';
-
 import { errors } from 'celebrate';
-
 import cors from 'cors';
-
-import usersRoutes from './routes/users';
-
-import cardsRoutes from './routes/cards';
-
+import usersRoutes from './routes/users.js';
+import cardsRoutes from './routes/cards.js';
 import {
   login, createUser,
-} from './controllers/users';
-
-import auth from './middlewares/auth';
-
-import errorHandler from './middlewares/error-handler';
-
-import { validateUserData } from './middlewares/validatons';
-
-import NotFound from './errors/not-found';
+} from './controllers/users.js';
+import auth from './middlewares/auth.js';
+import errorHandler from './middlewares/error-handler.js';
+import { validateUserData } from './middlewares/validatons.js';
+import NotFound from './errors/not-found.js'; */
 
 const app = express();
 app.use(cors());
@@ -64,6 +68,7 @@ async function main() {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
+  console.log('OK');
   await app.listen(PORT);
 }
 main();
