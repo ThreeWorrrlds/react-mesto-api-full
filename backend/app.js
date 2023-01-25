@@ -13,6 +13,7 @@ const {
 const { auth } = require('./middlewares/auth');
 const { errorHandler } = require('./middlewares/error-handler');
 const { validateUserData } = require('./middlewares/validatons');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 const NotFound = require('./middlewares/validatons');
 
 /* import { rateLimit } from 'express-rate-limit';
@@ -49,6 +50,7 @@ app.use(helmet());
 app.disable('x-powered-by');
 
 app.use(express.json());
+app.use(requestLogger);
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
@@ -64,6 +66,8 @@ app.use(cardsRoutes);
 app.use('*', (req, res, next) => {
   next(new NotFound('Не верен путь этот...'));
 });
+
+app.use(errorLogger);
 
 app.use(errors());
 
