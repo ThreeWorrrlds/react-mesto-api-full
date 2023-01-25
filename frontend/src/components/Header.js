@@ -7,7 +7,7 @@ function Header({ emailProfile }) {
   const history = useHistory();
 
   function signOut() {
-    localStorage.removeItem('token');
+    localStorage.removeItem('jwt');
     history.push('/sign-in');
   }
 

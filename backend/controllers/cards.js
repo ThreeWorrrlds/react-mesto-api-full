@@ -72,9 +72,9 @@ module.exports.setLikeByCardId = async (req, res, next) => {
     req.params.cardId,
     { $addToSet: { likes: req.user._id } }, // добавить _id в массив, если его там нет
     { new: true },
-  ).populate('likes')
+  )
     .orFail(new Error('NotFound'))
-    .then((responce) => res.send({ data: responce }))
+    .then((responce) => res.send(responce))
     .catch((err) => {
       if (err.name === 'CastError') {
         next(new BadRequestError('Переданы некорректные данные для постановки/снятии лайка'));
@@ -92,9 +92,9 @@ module.exports.unsetLikeByCardId = async (req, res, next) => {
     { $pull: { likes: req.user._id } }, // убрать _id из массива
     { new: true },
   )
-    .populate('likes')
+
     .orFail(new Error('NotFound'))
-    .then((responce) => res.send({ data: responce }))
+    .then((responce) => res.send(responce))
     .catch((err) => {
       if (err.name === 'CastError') {
         next(new BadRequestError('Переданы некорректные данные для постановки/снятии лайка'));

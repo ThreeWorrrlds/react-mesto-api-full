@@ -1,5 +1,5 @@
 
-export const BASE_URL = 'https://auth.nomoreparties.co';
+export const BASE_URL = 'http://localhost:3000';
 
 function checkResponce(res) {
   if (res.ok) {
@@ -36,7 +36,7 @@ export function login(email, password) {
     })
     .then((data) => {
       if (data.token) {
-        localStorage.setItem('token', data.token);
+        localStorage.setItem('jwt', data.token);    //JWT!!!! OR TOKEN!!!
         return data;
       }
     })

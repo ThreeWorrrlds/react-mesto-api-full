@@ -1,4 +1,6 @@
-export const BASE_URL = 'https://mesto.nomoreparties.co/v1/cohort-51';
+export const BASE_URL = 'http://localhost:3000';
+
+export const CURRENT_TOKEN = localStorage.getItem('jwt');
 
 export class Api {
   #onResponce(res) {
@@ -77,8 +79,10 @@ export class Api {
 const api = new Api(BASE_URL,
   {
     headers: {
-      "authorization": '9800edab-c01e-4941-9a81-bb143e90c5b8',
+      "authorization": `Bearer ${CURRENT_TOKEN}`,
       "content-type": "application/json"
     }
   });
 export { api };
+
+/* '9800edab-c01e-4941-9a81-bb143e90c5b8' */

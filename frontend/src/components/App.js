@@ -49,33 +49,13 @@ function App() {
   }, [isOpen])
 
   useEffect(() => {
-    api.getUserInfoFromServer()
-      .then((dataUser) => {
-        setCurrentUser(dataUser);
-      })
-      .catch((err) => {
-        console.log('Данные не получены', err);
-      })
-  }, []);
-
-  useEffect(() => {
-    api.getAllCards()
-      .then((dataCards) => {
-        setCards(dataCards);
-      })
-      .catch((err) => {
-        console.log('Данные не получены', err);
-      })
-  }, []);
-
-  function checkToken() {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('jwt');
     if (token) {
       auth.getContent(token)
         .then((res) => {
           if (res) {
             setLoggedIn(true);
-            setEmailProfile(res.data.email);
+            setEmailProfile(res.email);
             history.push('/');
           }
         })
@@ -83,10 +63,37 @@ function App() {
           console.log('checkToken', err);
         })
     }
-  }
+  }, [history]);
+
   useEffect(() => {
-    checkToken();
-  }, [])
+    const token = localStorage.getItem('jwt');
+    if (token) {
+      api.getUserInfoFromServer()
+        .then((dataUser) => {
+          setCurrentUser(dataUser);
+        })
+        .catch((err) => {
+          console.log('Данные не получены', err);
+        })
+    }
+  }, [loggedIn]);
+
+  useEffect(() => {
+    const token = localStorage.getItem('jwt');
+    if (token) {
+      api.getAllCards()
+        .then((dataCards) => {
+          setCards(dataCards);
+        })
+        .catch((err) => {
+          console.log('Данные не получены', err);
+        })
+    }
+  }, [loggedIn]);
+
+  /*   function checkToken() {
+  
+    } */
 
   function handleAddPlaceSubmit(card) {
     setIsLoading(true);
@@ -104,7 +111,7 @@ function App() {
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some((id) => id === currentUser._id);
     api.changeLike(card._id, isLiked)
       .then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
