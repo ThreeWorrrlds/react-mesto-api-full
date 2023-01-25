@@ -1,5 +1,6 @@
 
-export const BASE_URL = 'http://localhost:3000';
+/* export const BASE_URL = 'http://localhost:3000'; */
+export const BASE_URL = 'https://api.harrymidas.nomoredomains.rocks';
 
 function checkResponce(res) {
   if (res.ok) {
