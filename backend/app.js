@@ -1,3 +1,4 @@
+require('dotenv').config();
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const express = require('express');
@@ -48,6 +49,11 @@ app.use(helmet());
 app.disable('x-powered-by');
 
 app.use(express.json());
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 app.post('/signup', validateUserData, createUser);
 app.post('/signin', validateUserData, login);
 
