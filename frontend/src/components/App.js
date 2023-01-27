@@ -51,6 +51,7 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem('jwt');
     if (token) {
+      console.log(token);
       auth.getContent(token)
         .then((res) => {
           if (res) {
@@ -68,28 +69,38 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem('jwt');
     if (token) {
-      api.getUserInfoFromServer()
+
+      api.getUserInfoFromServer(token)
         .then((dataUser) => {
           setCurrentUser(dataUser);
         })
         .catch((err) => {
           console.log('Данные не получены', err);
         })
-    }
-  }, [loggedIn]);
 
-  useEffect(() => {
-    const token = localStorage.getItem('jwt');
-    if (token) {
-      api.getAllCards()
+      api.getAllCards(token)
         .then((dataCards) => {
           setCards(dataCards);
         })
         .catch((err) => {
           console.log('Данные не получены', err);
         })
+
     }
   }, [loggedIn]);
+
+  /*   useEffect(() => {
+      const token = localStorage.getItem('jwt');
+      if (token) {
+        api.getAllCards()
+          .then((dataCards) => {
+            setCards(dataCards);
+          })
+          .catch((err) => {
+            console.log('Данные не получены', err);
+          })
+      }
+    }, [loggedIn]); */
 
   /*   function checkToken() {
   

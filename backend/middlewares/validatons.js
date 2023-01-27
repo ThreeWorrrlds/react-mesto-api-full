@@ -4,10 +4,6 @@ const { isValidObjectId } = require('mongoose');
 
 const validator = require('validator');
 
-/* import { celebrate, Joi } from 'celebrate';
-import { isValidObjectId } from 'mongoose';
-import validator from 'validator'; */
-
 // eslint-disable-next-line import/prefer-default-export
 module.exports.validateUserData = celebrate({
   body: Joi.object().keys({

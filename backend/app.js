@@ -16,22 +16,6 @@ const { validateUserData } = require('./middlewares/validatons');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const NotFound = require('./middlewares/validatons');
 
-/* import { rateLimit } from 'express-rate-limit';
-import helmet from 'helmet';
-import express from 'express';
-import mongoose from 'mongoose';
-import { errors } from 'celebrate';
-import cors from 'cors';
-import usersRoutes from './routes/users.js';
-import cardsRoutes from './routes/cards.js';
-import {
-  login, createUser,
-} from './controllers/users.js';
-import auth from './middlewares/auth.js';
-import errorHandler from './middlewares/error-handler.js';
-import { validateUserData } from './middlewares/validatons.js';
-import NotFound from './errors/not-found.js'; */
-
 const app = express();
 app.use(cors());
 mongoose.set('strictQuery', false);
@@ -78,7 +62,6 @@ async function main() {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
-  console.log('OK');
   await app.listen(PORT);
 }
 main();

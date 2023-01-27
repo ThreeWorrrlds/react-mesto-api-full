@@ -6,14 +6,6 @@ const Forbidden = require('../errors/forbidden');
 
 const NotFound = require('../errors/not-found');
 
-/* import CardModel from '../models/Card';
-
-import BadRequestError from '../errors/bad-request-error';
-
-import Forbidden from '../errors/forbidden';
-
-import NotFound from '../errors/not-found'; */
-
 module.exports.getCards = async (req, res, next) => {
   try {
     const cards = await CardModel.find({});

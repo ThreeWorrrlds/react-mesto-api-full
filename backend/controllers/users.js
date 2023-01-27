@@ -14,21 +14,6 @@ const Unauthorized = require('../errors/unauthorized');
 
 const { NODE_ENV, JWT_SECRET = 'dev-secret' } = process.env;
 
-/*
-import bcrypt from 'bcryptjs';
-
-import jwt from 'jsonwebtoken';
-
-import UserModel from '../models/User';
-
-import BadRequestError from '../errors/bad-request-error';
-
-import Conflict from '../errors/conflict';
-
-import NotFound from '../errors/not-found';
-
-import Unauthorized from '../errors/unauthorized'; */
-
 module.exports.createUser = (req, res, next) => {
   bcrypt.hash(req.body.password, 10)
     .then((hash) => UserModel.create({

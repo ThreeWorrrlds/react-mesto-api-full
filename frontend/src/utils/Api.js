@@ -21,9 +21,12 @@ export class Api {
   }
 
 
-  getAllCards() {
+  getAllCards(token) {
     return this._request(`${this._baseUrl}/cards`, {
-      headers: this._headers
+      headers: {
+        "authorization": `Bearer ${token}`,
+        "content-type": "application/json"
+      }
     })
   }
 
@@ -62,8 +65,13 @@ export class Api {
     })
   }
 
-  getUserInfoFromServer() {
-    return this._request(`${this._baseUrl}/users/me`, { headers: this._headers })
+  getUserInfoFromServer(token) {
+    return this._request(`${this._baseUrl}/users/me`, {
+      headers: {
+        "authorization": `Bearer ${token}`,
+        "content-type": "application/json"
+      }
+    })
   }
 
   sendUserInfoToServer(data) {

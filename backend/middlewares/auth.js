@@ -4,10 +4,6 @@ const Unauthorized = require('../errors/unauthorized');
 
 const { NODE_ENV, JWT_SECRET = 'dev-secret' } = process.env;
 
-/* import jwt from 'jsonwebtoken';
-
-import Unauthorized from '../errors/unauthorized'; */
-
 // eslint-disable-next-line consistent-return
 module.exports.auth = async (req, res, next) => {
   const { authorization } = await req.headers;
@@ -25,5 +21,3 @@ module.exports.auth = async (req, res, next) => {
   }
   next();
 };
-
-/* export default auth; */
