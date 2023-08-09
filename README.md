@@ -14,7 +14,3 @@ ________________________________________________________________________________
 - `Express`
 - `REST API`
 - `Mongoose`
-
-IP  51.250.92.205
-Frontend  https://harrymidas.nomoredomains.rocks
-Backend  https://api.harrymidas.nomoredomains.rocks
